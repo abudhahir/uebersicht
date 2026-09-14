@@ -7,6 +7,7 @@ const createPersistence = require('./platform/persistence');
 const { createWidgetWindow } = require('./platform/window');
 const { displays } = require('./platform/display');
 const { createTray, notify } = require('./platform/system');
+const { setStartAtLogin } = require('./platform/startup');
 
 const PORT = Number(process.env.UEBERSICHT_PORT || 41416);
 const repositoryRoot = path.resolve(__dirname, '..', '..');
@@ -63,6 +64,7 @@ function syncWindows() {
 async function start() {
   await app.whenReady();
   createPersistence(app.getPath('userData'));
+  setStartAtLogin(process.env.UEBERSICHT_START_AT_LOGIN === '1');
   startServer();
   tray = createTray({
     onRefresh: () => syncWindows(),
