@@ -407,6 +407,36 @@ There is one last step on the Node.js side to complete. For the sake of brevity,
 
 http://stackoverflow.com/questions/31254725/transport-security-has-blocked-a-cleartext-http
 
+## Windows and Linux
+
+The repository includes an Electron desktop host in [`desktop/`](desktop/).
+It reuses the Node.js widget server, React/JSX widget contract, and local
+HTTP/WebSocket protocol while replacing the macOS Cocoa shell.
+
+To run the cross-platform host:
+
+```sh
+cd server
+npm install
+npm run release
+cd ../desktop
+npm install
+npm start
+```
+
+The host provides transparent per-display widget windows, a click-through
+background layer, an interactive foreground layer, display-change handling,
+tray actions, notifications, startup configuration, persistence, and
+platform-specific shell execution. Windows uses `cmd.exe` by default; Linux
+uses the user's POSIX shell.
+
+Linux support targets X11 first. Wayland compositors may restrict desktop-layer
+windows, click-through behavior, or always-on-bottom placement. Existing
+widgets that invoke macOS-specific commands will need platform-specific
+commands or a portable alternative. See the [desktop host documentation](desktop/README.md)
+and [Windows/Linux compatibility matrix](COMPATIBILITY.md) for details and
+release test requirements.
+
 # Legal
 
 The source for Übersicht is released under the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
