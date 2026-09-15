@@ -1,0 +1,14 @@
+{
+  "name": "uebersicht-desktop",
+  "version": "1.0.0",
+  "description": "Cross-platform desktop host for Übersicht widgets",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test test/*.test.js"
+  },
+  "license": "GPL-3.0-or-later",
+  "devDependencies": {
+    "electron": "^42.0.1"
+  }
+}
